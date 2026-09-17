@@ -48,22 +48,3 @@ The published executable will be in `bin/Release/net9.0-windows/win-x64/publish/
 3. Click "Browse..." next to "Select destination folder:" to choose where to copy
 4. Click "Copy" to copy the file
 5. Use menu options to change language or theme
-
-## What to Upload to GitHub
-
-Upload these files/folders:
-- `MainWindow.xaml.cs` - Main UI logic
-- `MainWindow.xaml` - UI layout (if exists)
-- `App.xaml.cs` - Application entry point
-- `App.xaml` - App resources (if exists)
-- `AssemblyInfo.cs` - Assembly metadata
-- `FileCopier.csproj` - Project file
-- `README.md` - This file
-- `.gitignore` - Git ignore rules
-
-**Do NOT upload:**
-- `bin/` - Compiled binaries
-- `obj/` - Build artifacts
-- `.vs/` - Visual Studio cache
-- `*.user` - User settings
-- Any files in `obj/` or `bin/`
