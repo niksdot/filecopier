@@ -18,6 +18,9 @@ Desktop application for copying files with multilingual support and theme select
 - **Target**: Windows x64
 - **Build**: Self-contained executable
 
+## Download
+Go to https://github.com/niksdot/filecopier/releases and download latest realese
+
 ## Building
 
 ### Prerequisites
