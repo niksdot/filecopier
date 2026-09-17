@@ -1,0 +1,61 @@
+﻿<Window x:Class="FileCopier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileCopier"
+        mc:Ignorable="d"
+        Title="File Copier" Height="500" Width="600"
+        Background="#F5F5F5"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Background="White" BorderBrush="#BDC3C7" BorderThickness="0,0,0,1">
+            <MenuItem x:Name="LanguageMenu" Header="Language">
+                <MenuItem Header="English" Click="SetEnglish_Click"/>
+                <MenuItem Header="Русский" Click="SetRussian_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="ThemeMenu" Header="Theme">
+                <MenuItem Header="Light" Click="SetLightTheme_Click"/>
+                <MenuItem Header="Dark" Click="SetDarkTheme_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Grid.Row="1" Margin="30" VerticalAlignment="Center">
+            <TextBlock x:Name="TitleText" Text="File Copier" FontSize="28" FontWeight="Bold" Foreground="#2C3E50" Margin="0,0,0,30" TextAlignment="Center"/>
+
+            <TextBlock x:Name="SelectFileLabel" Text="Select file to copy:" FontSize="13" Foreground="#34495E" Margin="0,0,0,8" FontWeight="SemiBold"/>
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtFilePath" IsReadOnly="True" Grid.Column="0" Height="38" VerticalContentAlignment="Center" Padding="12,0" Background="White" BorderBrush="#BDC3C7" BorderThickness="1" Foreground="#2C3E50"/>
+                <Button x:Name="BrowseFileBtn" Content="Browse..." Click="BtnSelectFile_Click" Grid.Column="1" Margin="10,0,0,0" Padding="20,0" Background="#3498DB" Foreground="White" FontWeight="SemiBold" Cursor="Hand"/>
+            </Grid>
+
+            <TextBlock x:Name="SelectFolderLabel" Text="Select destination folder:" FontSize="13" Foreground="#34495E" Margin="0,0,0,8" FontWeight="SemiBold"/>
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtFolderPath" IsReadOnly="True" Grid.Column="0" Height="38" VerticalContentAlignment="Center" Padding="12,0" Background="White" BorderBrush="#BDC3C7" BorderThickness="1" Foreground="#2C3E50"/>
+                <Button x:Name="BrowseFolderBtn" Content="Browse..." Click="BtnSelectFolder_Click" Grid.Column="1" Margin="10,0,0,0" Padding="20,0" Background="#3498DB" Foreground="White" FontWeight="SemiBold" Cursor="Hand"/>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Button x:Name="CopyBtn" Content="Copy" Click="BtnCopy_Click" Padding="30,12" Background="#27AE60" Foreground="White" FontWeight="Bold" FontSize="13" Cursor="Hand" MinWidth="120"/>
+                <Button x:Name="ClearBtn" Content="Clear" Click="BtnClear_Click" Padding="30,12" Background="#95A5A6" Foreground="White" FontWeight="Bold" FontSize="13" Cursor="Hand" Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <ProgressBar x:Name="progressBar" Height="4" Margin="0,25,0,0" Background="#ECF0F1" Foreground="#27AE60" Visibility="Collapsed"/>
+            <TextBlock x:Name="statusText" Margin="0,10,0,0" Foreground="#27AE60" TextAlignment="Center" FontSize="12"/>
+        </StackPanel>
+    </Grid>
+</Window>
