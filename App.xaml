@@ -34,7 +34,6 @@
 
             <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FFFFFF"/>
             <SolidColorBrush x:Key="CardBorderBrush" Color="#E4EAF6"/>
-            <SolidColorBrush x:Key="DividerBrush" Color="#EFF2F9"/>
 
             <!-- soft sheen across the top of the card / buttons -->
             <LinearGradientBrush x:Key="CardGlossBrush" StartPoint="0,0" EndPoint="0,1">
@@ -66,14 +65,6 @@
                 <GradientStop Color="#6366F1" Offset="0"/>
                 <GradientStop Color="#8B5CF6" Offset="1"/>
             </LinearGradientBrush>
-            <LinearGradientBrush x:Key="AccentHoverBrush" StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#7A7CF7" Offset="0"/>
-                <GradientStop Color="#9F71FF" Offset="1"/>
-            </LinearGradientBrush>
-            <LinearGradientBrush x:Key="AccentPressedBrush" StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#4F46E5" Offset="0"/>
-                <GradientStop Color="#7C3AED" Offset="1"/>
-            </LinearGradientBrush>
 
             <!-- primary action: rich three-stop gradient -->
             <LinearGradientBrush x:Key="PrimaryBrush" StartPoint="0,0" EndPoint="1,1">
@@ -97,19 +88,6 @@
             <SolidColorBrush x:Key="TintHoverBrush" Color="#E0E7FF"/>
             <SolidColorBrush x:Key="TintPressedBrush" Color="#C7D2FE"/>
             <SolidColorBrush x:Key="TintTextBrush" Color="#4F46E5"/>
-
-            <LinearGradientBrush x:Key="SuccessBrush" StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#10B981" Offset="0"/>
-                <GradientStop Color="#059669" Offset="1"/>
-            </LinearGradientBrush>
-            <LinearGradientBrush x:Key="SuccessHoverBrush" StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#25C795" Offset="0"/>
-                <GradientStop Color="#0AA874" Offset="1"/>
-            </LinearGradientBrush>
-            <LinearGradientBrush x:Key="SuccessPressedBrush" StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#059669" Offset="0"/>
-                <GradientStop Color="#047857" Offset="1"/>
-            </LinearGradientBrush>
 
             <LinearGradientBrush x:Key="NeutralBrush" StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#F1F4FB" Offset="0"/>
@@ -154,11 +132,12 @@
                  GLOWS  (cast by a shadow layer placed behind each button/card so
                  that label text keeps crisp ClearType rendering)
                  ================================================================== -->
-            <DropShadowEffect x:Key="GlowAccent" Color="#6366F1" BlurRadius="16" ShadowDepth="4" Direction="270" Opacity="0.34"/>
             <DropShadowEffect x:Key="GlowPrimary" Color="#B855F7" BlurRadius="18" ShadowDepth="5" Direction="270" Opacity="0.42"/>
-            <DropShadowEffect x:Key="GlowSuccess" Color="#10B981" BlurRadius="16" ShadowDepth="4" Direction="270" Opacity="0.34"/>
             <DropShadowEffect x:Key="GlowNeutral" Color="#8FA0BC" BlurRadius="12" ShadowDepth="3" Direction="270" Opacity="0.26"/>
             <DropShadowEffect x:Key="GlowTint" Color="#818CF8" BlurRadius="10" ShadowDepth="2" Direction="270" Opacity="0.2"/>
+            <DropShadowEffect x:Key="FocusGlowEffect" Color="#6366F1" BlurRadius="12" ShadowDepth="0" Opacity="0.38"/>
+            <DropShadowEffect x:Key="LogoGlowEffect" Color="#8B5CF6" BlurRadius="14" ShadowDepth="2" Direction="270" Opacity="0.5"/>
+            <DropShadowEffect x:Key="SegmentActiveGlowEffect" Color="#0F172A" BlurRadius="8" ShadowDepth="1" Direction="270" Opacity="0.16"/>
 
             <!-- ==================================================================
                  BUTTONS  (pill-shaped, glossy, with coloured glow)
@@ -215,19 +194,6 @@
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
             </Style>
 
-            <Style x:Key="AccentButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
-                <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
-                <Setter Property="local:Effects.Glow" Value="{StaticResource GlowAccent}"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="{DynamicResource AccentHoverBrush}"/>
-                    </Trigger>
-                    <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Background" Value="{DynamicResource AccentPressedBrush}"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
             <Style x:Key="PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
                 <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
                 <Setter Property="local:Effects.Glow" Value="{StaticResource GlowPrimary}"/>
@@ -251,19 +217,6 @@
                     </Trigger>
                     <Trigger Property="IsPressed" Value="True">
                         <Setter Property="Background" Value="{DynamicResource TintPressedBrush}"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
-            <Style x:Key="SuccessButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
-                <Setter Property="Background" Value="{DynamicResource SuccessBrush}"/>
-                <Setter Property="local:Effects.Glow" Value="{StaticResource GlowSuccess}"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="{DynamicResource SuccessHoverBrush}"/>
-                    </Trigger>
-                    <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Background" Value="{DynamicResource SuccessPressedBrush}"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -352,12 +305,7 @@
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="True">
                                     <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SegmentActiveBrush}"/>
-                                    <Setter TargetName="Bd" Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect Color="#0F172A" BlurRadius="8" ShadowDepth="1"
-                                                              Direction="270" Opacity="0.16"/>
-                                        </Setter.Value>
-                                    </Setter>
+                                    <Setter TargetName="Bd" Property="Effect" Value="{DynamicResource SegmentActiveGlowEffect}"/>
                                     <Setter Property="Foreground" Value="{DynamicResource SegmentActiveTextBrush}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
@@ -397,11 +345,7 @@
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
                                     <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource FocusBorderBrush}"/>
-                                    <Setter TargetName="Bd" Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect Color="#6366F1" BlurRadius="12" ShadowDepth="0" Opacity="0.38"/>
-                                        </Setter.Value>
-                                    </Setter>
+                                    <Setter TargetName="Bd" Property="Effect" Value="{DynamicResource FocusGlowEffect}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -439,7 +383,7 @@
                                                                  To="1" Duration="0:0:0.01"/>
                                                 <DoubleAnimation Storyboard.TargetName="IndicatorShift"
                                                                  Storyboard.TargetProperty="X"
-                                                                 From="-170" To="780" Duration="0:0:1.9">
+                                                                 From="-170" To="2000" Duration="0:0:1.9">
                                                     <DoubleAnimation.EasingFunction>
                                                         <SineEase EasingMode="EaseInOut"/>
                                                     </DoubleAnimation.EasingFunction>

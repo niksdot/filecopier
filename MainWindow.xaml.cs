@@ -48,26 +48,26 @@ public partial class MainWindow : Window
     {
         "WindowBackgroundBrush",
         "Orb1Brush", "Orb2Brush", "Orb3Brush",
-        "CardBackgroundBrush", "CardBorderBrush", "DividerBrush", "CardGlossBrush",
+        "CardBackgroundBrush", "CardBorderBrush", "CardGlossBrush",
         "TitleGradientBrush",
         "TextPrimaryBrush", "TextSecondaryBrush",
         "InputBrush", "InputBorderBrush", "FocusBorderBrush", "InputIconTintBrush", "InputIconBrush",
-        "AccentBrush", "AccentHoverBrush", "AccentPressedBrush",
+        "AccentBrush",
         "PrimaryBrush", "PrimaryHoverBrush", "PrimaryPressedBrush",
         "TintBrush", "TintHoverBrush", "TintPressedBrush", "TintTextBrush",
-        "SuccessBrush", "SuccessHoverBrush", "SuccessPressedBrush",
         "NeutralBrush", "NeutralHoverBrush", "NeutralPressedBrush", "NeutralTextBrush",
         "SegmentTrackBrush", "SegmentHoverBrush", "SegmentActiveBrush", "SegmentTextBrush", "SegmentActiveTextBrush",
         "ProgressTrackBrush", "SuccessTextBrush", "ErrorTextBrush", "InfoTextBrush",
         "SuccessTintBrush", "SuccessBorderBrush", "ErrorTintBrush", "ErrorBorderBrush",
         "InfoTintBrush", "InfoBorderBrush",
         "WindowButtonHoverBrush", "WindowButtonPressedBrush", "CloseHoverBrush", "ClosePressedBrush",
-        "WindowButtonGlyphBrush", "OnAccentBrush"
+        "WindowButtonGlyphBrush", "OnAccentBrush",
+        "FocusGlowEffect", "LogoGlowEffect", "SegmentActiveGlowEffect"
     };
 
     /// <summary>Light palette captured from App.xaml so the two themes never drift apart.</summary>
     private readonly Dictionary<string, object> lightPalette = new();
-    private readonly Dictionary<string, Brush> darkPalette = new();
+    private readonly Dictionary<string, object> darkPalette = new();
 
     private readonly Dictionary<string, Dictionary<string, string>> translations = new()
     {
@@ -81,8 +81,6 @@ public partial class MainWindow : Window
                 { "Browse", "Browse..." },
                 { "Copy", "Copy" },
                 { "Clear", "Clear" },
-                { "Language", "Language" },
-                { "Theme", "Theme" },
                 { "Light", "Light theme" },
                 { "Dark", "Dark theme" },
                 { "Minimize", "Minimize" },
@@ -91,6 +89,8 @@ public partial class MainWindow : Window
                 { "Close", "Close" },
                 { "SelectBoth", "Select file and destination folder." },
                 { "FileNotFound", "File not found." },
+                { "FolderNotFound", "Destination folder not found." },
+                { "SameLocation", "Source and destination are the same file." },
                 { "FileExists", "File '{0}' already exists in this folder.\nOverwrite?" },
                 { "Confirm", "Confirmation" },
                 { "Copying", "Copying..." },
@@ -110,8 +110,6 @@ public partial class MainWindow : Window
                 { "Browse", "Обзор..." },
                 { "Copy", "Копировать" },
                 { "Clear", "Очистить" },
-                { "Language", "Язык" },
-                { "Theme", "Тема" },
                 { "Light", "Светлая тема" },
                 { "Dark", "Тёмная тема" },
                 { "Minimize", "Свернуть" },
@@ -120,6 +118,8 @@ public partial class MainWindow : Window
                 { "Close", "Закрыть" },
                 { "SelectBoth", "Выберите файл и папку назначения." },
                 { "FileNotFound", "Файл не найден." },
+                { "FolderNotFound", "Папка назначения не найдена." },
+                { "SameLocation", "Исходный файл и файл назначения совпадают." },
                 { "FileExists", "Файл '{0}' уже существует в этой папке.\nПерезаписать?" },
                 { "Confirm", "Подтверждение" },
                 { "Copying", "Копирование..." },
@@ -231,7 +231,6 @@ public partial class MainWindow : Window
 
         darkPalette["CardBackgroundBrush"] = Solid("#151A26");
         darkPalette["CardBorderBrush"] = Solid("#262E41");
-        darkPalette["DividerBrush"] = Solid("#232B3B");
 
         darkPalette["CardGlossBrush"] = VGradient("#14FFFFFF", "#00FFFFFF");
 
@@ -247,8 +246,6 @@ public partial class MainWindow : Window
         darkPalette["InputIconBrush"] = Solid("#9AA7FF");
 
         darkPalette["AccentBrush"] = Gradient("#7C7CF8", "#A855F7");
-        darkPalette["AccentHoverBrush"] = Gradient("#8F8FFF", "#B875FF");
-        darkPalette["AccentPressedBrush"] = Gradient("#6366F1", "#8B5CF6");
 
         darkPalette["PrimaryBrush"] = Gradient3("#7C7CF8", "#9F6FF8", "#DA5CF0");
         darkPalette["PrimaryHoverBrush"] = Gradient3("#8F8FFF", "#B285FA", "#E678F5");
@@ -258,10 +255,6 @@ public partial class MainWindow : Window
         darkPalette["TintHoverBrush"] = Solid("#2C3654");
         darkPalette["TintPressedBrush"] = Solid("#364265");
         darkPalette["TintTextBrush"] = Solid("#C7D2FE");
-
-        darkPalette["SuccessBrush"] = Gradient("#10B981", "#059669");
-        darkPalette["SuccessHoverBrush"] = Gradient("#25C795", "#0AA874");
-        darkPalette["SuccessPressedBrush"] = Gradient("#0B9E6E", "#047857");
 
         darkPalette["NeutralBrush"] = Gradient("#242C3D", "#1E2533");
         darkPalette["NeutralHoverBrush"] = Gradient("#2D3749", "#262F41");
@@ -292,6 +285,10 @@ public partial class MainWindow : Window
         darkPalette["ClosePressedBrush"] = Solid("#DC2626");
         darkPalette["WindowButtonGlyphBrush"] = Solid("#8E9BB2");
         darkPalette["OnAccentBrush"] = Solid("#FFFFFF");
+
+        darkPalette["FocusGlowEffect"] = Glow("#8B8CFF", blur: 12, depth: 0, opacity: 0.42);
+        darkPalette["LogoGlowEffect"] = Glow("#A855F7", blur: 14, depth: 2, opacity: 0.55);
+        darkPalette["SegmentActiveGlowEffect"] = Glow("#000000", blur: 8, depth: 1, opacity: 0.35);
     }
 
     private void ApplyTheme()
@@ -300,12 +297,12 @@ public partial class MainWindow : Window
 
         foreach (var key in PaletteKeys)
         {
-            object? brush = isDarkTheme
+            object? value = isDarkTheme
                 ? (darkPalette.TryGetValue(key, out var dark) ? dark : null)
                 : (lightPalette.TryGetValue(key, out var light) ? light : null);
 
-            if (brush is not null)
-                resources[key] = brush;
+            if (value is not null)
+                resources[key] = value;
         }
     }
 
@@ -355,6 +352,20 @@ public partial class MainWindow : Window
 
     private static Color Parse(string hex) =>
         (Color)System.Windows.Media.ColorConverter.ConvertFromString(hex)!;
+
+    private static DropShadowEffect Glow(string hex, double blur, double depth, double opacity)
+    {
+        var effect = new DropShadowEffect
+        {
+            Color = Parse(hex),
+            BlurRadius = blur,
+            ShadowDepth = depth,
+            Direction = 270,
+            Opacity = opacity
+        };
+        effect.Freeze();
+        return effect;
+    }
 
     #endregion
 
@@ -508,7 +519,7 @@ public partial class MainWindow : Window
 
     private void BtnSelectFolder_Click(object sender, RoutedEventArgs e)
     {
-        var folderDialog = new System.Windows.Forms.FolderBrowserDialog();
+        using var folderDialog = new System.Windows.Forms.FolderBrowserDialog();
         if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
         {
             selectedFolderPath = folderDialog.SelectedPath;
@@ -534,8 +545,23 @@ public partial class MainWindow : Window
             return;
         }
 
+        if (!Directory.Exists(selectedFolderPath))
+        {
+            MessageBox.Show(GetText("FolderNotFound"), GetText("Title"), MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
         string fileName = Path.GetFileName(selectedFilePath);
         string destPath = Path.Combine(selectedFolderPath, fileName);
+
+        if (string.Equals(
+                Path.GetFullPath(selectedFilePath),
+                Path.GetFullPath(destPath),
+                StringComparison.OrdinalIgnoreCase))
+        {
+            MessageBox.Show(GetText("SameLocation"), GetText("Title"), MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
 
         if (File.Exists(destPath))
         {
@@ -565,6 +591,10 @@ public partial class MainWindow : Window
         catch (UnauthorizedAccessException ex)
         {
             ShowStatus(GetText("AccessError", ex.Message), StatusKind.Error);
+        }
+        catch (Exception ex)
+        {
+            ShowStatus(GetText("Error", ex.Message), StatusKind.Error);
         }
         finally
         {

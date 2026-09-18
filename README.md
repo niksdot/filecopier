@@ -44,4 +44,4 @@ The published executable will be in `bin/Release/net9.0-windows/win-x64/publish/
 2. Click "Browse..." next to "Select file to copy:" to choose a file
 3. Click "Browse..." next to "Select destination folder:" to choose where to copy
 4. Click "Copy" to copy the file
-5. Use menu options to change language or theme
+5. Use the language and theme toggles in the title bar to switch language or theme

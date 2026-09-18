@@ -51,11 +51,8 @@
                 <!-- ======================= TITLE BAR ======================= -->
                 <Grid Grid.Row="0" Height="54" Margin="12,0,12,0">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,0,0,0">
-                        <Border Width="30" Height="30" CornerRadius="10" Background="{DynamicResource AccentBrush}">
-                            <Border.Effect>
-                                <DropShadowEffect Color="#8B5CF6" BlurRadius="14" ShadowDepth="2"
-                                                  Direction="270" Opacity="0.5"/>
-                            </Border.Effect>
+                        <Border Width="30" Height="30" CornerRadius="10" Background="{DynamicResource AccentBrush}"
+                                Effect="{DynamicResource LogoGlowEffect}">
                             <Canvas Width="20" Height="20">
                                 <!-- back sheet -->
                                 <Path Stroke="#FFFFFF" StrokeThickness="1.7"
